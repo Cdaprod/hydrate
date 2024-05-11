@@ -1,6 +1,7 @@
 name: Publish Python Package
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  # or any other branch or tag you use for releases
