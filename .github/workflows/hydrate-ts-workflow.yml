@@ -17,4 +17,4 @@ jobs:
           tags: tag:ci
 
       - name: Run Python Script
-        run: python ./github/scripts/hydrate.py
+        run: python hydrate/hydrate.py
