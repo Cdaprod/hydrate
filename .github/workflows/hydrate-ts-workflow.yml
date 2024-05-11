@@ -1,7 +1,9 @@
 name: Process and Log URL Data
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   hydrate-minio-weaviate:
