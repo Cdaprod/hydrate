@@ -1,8 +1,11 @@
 from setuptools import setup, find_packages
+import osr
+
+version = os.getenv('PACKAGE_VERSION', '0.1.0') 
 
 setup(
     name='hydrate-minio-weaviate',
-    version='0.1.1',
+    version=version,
     packages=find_packages(),
     description='A package to fetch, store, and process documents using MinIO and Weaviate.',
     long_description=open('README.md').read(),
