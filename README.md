@@ -1,11 +1,10 @@
-# Hydrate-Minio-Weaviate
+[![Build and Publish Python Package](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml/badge.svg)](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml)
+
+[![Build and Publish Python Package](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml/badge.svg)](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml)
 
 ![](photo.webp)
 
-[![Build and Publish Python Package](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml/badge.svg)](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml)
-
-[![Build and Publish Python Package](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml/badge.svg)](https://github.com/Cdaprod/hydrate/actions/workflows/push-to-pypi.yml)
-
+# Hydrate-Minio-Weaviate
 Hydrate-Minio-Weaviate is a powerful Python package designed to automate the extraction, transformation, and loading of data from web resources directly into MinIO and Weaviate. This tool simplifies the process of hydrating your data lake and knowledge graph with fresh data, enhancing your AI and machine learning workflows with minimal effort.
 
 ## Features
@@ -163,5 +162,3 @@ If you need assistance or have any queries, please email us at support@example.c
 ### Notes:
 - **Documentation Link**: Replace `#` with the actual link to your documentation, which might be on GitHub pages or another site.
 - **Issues Page**: Link to the GitHub issues page for your project to show the roadmap and current issues.
-
-This template provides a solid base for your README, making your GitHub repository professional and informative for potential users and contributors. Adjust it as necessary to fit the specific aspects of your project.
