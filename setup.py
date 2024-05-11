@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='hydrate',
-    version='0.1.0',
+    name='hydrate-minio-weaviate',
+    version='0.1.1',
     packages=find_packages(),
     description='A package to fetch, store, and process documents using MinIO and Weaviate.',
     long_description=open('README.md').read(),
