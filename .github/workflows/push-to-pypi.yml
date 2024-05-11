@@ -17,7 +17,7 @@ jobs:
         python-version: '3.8'
 
     - name: Extract version from tag
-      run: echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's/refs\/tags\///')" >> $GITHUB_ENV
+      run: echo "PACKAGE_VERSION=$(echo ${GITHUB_REF#refs/tags/} | sed 's/^v//')" >> $GITHUB_ENV
 
     - name: Install dependencies
       run: |
