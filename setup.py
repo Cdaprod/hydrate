@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = os.getenv('PACKAGE_VERSION', '0.1.2') 
+version = os.getenv('PACKAGE_VERSION', '0.1.0') 
 
 setup(
     name='hydrate-minio-weaviate',

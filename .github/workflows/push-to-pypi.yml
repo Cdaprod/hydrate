@@ -1,40 +1,45 @@
 name: Build and Publish Python Package
 
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        default: '0.1.0'
   push:
-    branches:
-      - main
+    paths:
+      - '.github/workflows/build-and-publish.yml'  # Adjust path as necessary
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
 
-    - name: Extract version from tag
-      run: echo "PACKAGE_VERSION=$(echo ${GITHUB_REF#refs/tags/} | sed 's/^v//')" >> $GITHUB_ENV
+      - name: Setup environment variable for version
+        run: echo "PACKAGE_VERSION=${{ github.event.inputs.version || '0.1.0' }}" >> $GITHUB_ENV
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install setuptools wheel twine
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
 
-    - name: Build package
-      run: |
-        python setup.py sdist bdist_wheel
+      - name: Build package
+        run: |
+          python setup.py sdist bdist_wheel
 
-    - name: List built packages
-      run: |
-        ls dist
+      - name: List built packages
+        run: ls dist
 
-    - name: Publish to PyPi
-      env:
-        TWINE_USERNAME: '__token__'
-        TWINE_PASSWORD: ${{ secrets.PYPI_API_KEY }}
-      run: |
-        twine upload dist/* --verbose
+      - name: Publish to PyPi
+        env:
+          TWINE_USERNAME: '__token__'
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_KEY }}
+        run: |
+          twine upload dist/* --verbose
