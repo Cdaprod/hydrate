@@ -1,4 +1,4 @@
-name: Access Tailnet Services
+name: Process and Log URL Data
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests minio weaviate-client pydantic
+          pip install requests minio weaviate-client pydantic unstructured
 
       - name: Setup Tailscale
         uses: tailscale/github-action@v2
@@ -26,9 +26,6 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
-
-      - name: Create log file
-        run: touch process_log.txt
 
       - name: Run Hydrate Script
         run: |
