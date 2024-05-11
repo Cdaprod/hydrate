@@ -18,7 +18,8 @@ setup(
         'unstructured',
         'io',
         'tempfile',
-        're'
+        're',
+        'dotenv'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

@@ -16,7 +16,7 @@ In the notebook, you import the main function from the hydrate.py script. Then, 
 This approach allows you to use the hydrate.py script as a modular component within your notebook, providing the necessary input directly from the notebook environment.
 Make sure that the hydrate.py script and the notebook are in the same directory, so that the notebook can import the script correctly.
 """
-
+from dotenv import load_dotenv
 import requests
 from minio import Minio
 import weaviate
@@ -28,17 +28,19 @@ import io
 from pydantic import BaseModel, Field, validator
 from typing import List, Optional
 
-#class ClientConfig(BaseModel):
-    #minio_endpoint: str = Field(default="rpi5-1.tailb3ac8.ts.net:9000")
-    #minio_access_key: str = Field(default="cda_cdaprod")
-    #minio_secret_key: str = Field(default="cda_cdaprod")
-    #weaviate_endpoint: str = Field(default="http://rpi5-1.tailb3ac8.ts.net:8080")
+load_dotenv()  # This loads the environment variables from .env file
 
 class ClientConfig(BaseModel):
-    minio_endpoint: str = Field(default="play.min.io:443")
-    minio_access_key: str = Field(default="minioadmin")
-    minio_secret_key: str = Field(default="minioadmin")
-    weaviate_endpoint: str = Field(default="http://rpi5-1.tailb3ac8.ts.net:8080")
+    minio_endpoint: str = os.getenv('MINIO_ENDPOINT', 'play.min.io:443')
+    minio_access_key: str = os.getenv('MINIO_ACCESS_KEY', 'minioadmin')
+    minio_secret_key: str = os.getenv('MINIO_SECRET_KEY', 'minioadmin')
+    weaviate_endpoint: str = os.getenv('WEAVIATE_ENDPOINT', 'http://localhost:8080')
+
+# class ClientConfig(BaseModel):
+#     minio_endpoint: str = Field(default="play.min.io:443")
+#     minio_access_key: str = Field(default="minioadmin")
+#     minio_secret_key: str = Field(default="minioadmin")
+#     weaviate_endpoint: str = Field(default="http://rpi5-1.tailb3ac8.ts.net:8080")
 
 class MinioClient(BaseModel):
     config: ClientConfig = Field(default_factory=ClientConfig)
