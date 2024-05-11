@@ -1,0 +1,18 @@
+name: Access Tailnet Services
+
+on: [push]
+
+jobs:
+  tailscale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Tailscale
+        uses: tailscale/github-action@main
+        with:
+          authkey: ${{ secrets.TS_AUTHKEY }}
+
+      - name: Run Python Script
+        run: python ./github/scripts/hydrate.py
