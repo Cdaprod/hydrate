@@ -1,13 +1,9 @@
 name: Build and Publish Python Package
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-  push:
-    paths:
-      - 'hydrate/*'
 
 jobs:
   build-and-publish:
