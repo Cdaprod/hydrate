@@ -2,6 +2,12 @@ name: Build and Publish Python Package
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+  push:
+    paths:
+      - 'hydrate/*'
 
 jobs:
   build-and-publish:
@@ -24,17 +30,15 @@ jobs:
 
     - name: Build package
       run: |
-        cd app
         python setup.py sdist bdist_wheel
 
     - name: List built packages
       run: |
-        ls app/dist
+        ls dist
 
     - name: Publish to PyPi
       env:
         TWINE_USERNAME: '__token__'
         TWINE_PASSWORD: ${{ secrets.PYPI_API_KEY }}
       run: |
-        cd app
         twine upload dist/* --verbose
