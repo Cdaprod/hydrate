@@ -16,18 +16,17 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests minio weaviate-client pydantic unstructured python-dotenv
+
       - name: Load environment variables
         run: |
           echo "MINIO_ACCESS_KEY=${{ secrets.MINIO_ACCESS_KEY }}" >> $GITHUB_ENV
           echo "MINIO_SECRET_KEY=${{ secrets.MINIO_SECRET_KEY }}" >> $GITHUB_ENV
           echo "WEAVIATE_ENDPOINT=${{ secrets.WEAVIATE_ENDPOINT }}" >> $GITHUB_ENV
-      - name: Run script
-        run: python hydrate/hydrate.py
-
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests minio weaviate-client pydantic unstructured python-dotenv
 
       - name: Setup Tailscale
         uses: tailscale/github-action@v2
