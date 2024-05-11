@@ -133,22 +133,23 @@ class DocumentProcessor:
             os.remove(file_path)
             print(f"MinIO and Weaviate have ingested '{object_name}'! :)")
 
-    def fetch_and_process_urls(self, urls, bucket_name):
-        processed_object_names = []  # Track successfully processed URLs
+    ## v0.1.0 - Latest working from Juno (Modular usage)
+    # def fetch_and_process_urls(self, urls, bucket_name):
+    #     processed_object_names = []  # Track successfully processed URLs
 
-        if not self.minio_client.client.bucket_exists(bucket_name):
-            self.minio_client.client.make_bucket(bucket_name)
-            print(f"Bucket '{bucket_name}' created.")
+    #     if not self.minio_client.client.bucket_exists(bucket_name):
+    #         self.minio_client.client.make_bucket(bucket_name)
+    #         print(f"Bucket '{bucket_name}' created.")
 
-        for url in urls:
-            object_name = self.store_in_minio(url, bucket_name)
-            if object_name:
-                processed_object_names.append(object_name)
+    #     for url in urls:
+    #         object_name = self.store_in_minio(url, bucket_name)
+    #         if object_name:
+    #             processed_object_names.append(object_name)
 
-        if processed_object_names:
-            self.process_documents_in_minio(bucket_name, processed_object_names)
-        else:
-            print("No new documents to process.")
+    #     if processed_object_names:
+    #         self.process_documents_in_minio(bucket_name, processed_object_names)
+    #     else:
+    #         print("No new documents to process.")
 
 # # Example usage
 # if __name__ == "__main__":
@@ -162,10 +163,38 @@ class DocumentProcessor:
 #     bucket_name = "cda-datasets"
 #     processor.fetch_and_process_urls(urls, bucket_name)
 
-def main(urls, bucket_name):
+## 0.1.0 - Latest working from Juno (Modular usage) 
+# def main(urls, bucket_name):
+#     config = ClientConfig()
+#     minio_client = MinioClient(config=config)
+#     weaviate_client = WeaviateClient(config=config)
+
+#     processor = DocumentProcessor(minio_client, weaviate_client)
+#     processor.fetch_and_process_urls(urls, bucket_name)
+
+## For GitHub Tailscale (tags=ci)
+def fetch_and_process_urls(self, urls, bucket_name, log_file_path):
+    processed_object_names = []  # Track successfully processed URLs
+    with open(log_file_path, 'a') as log_file:
+        if not self.minio_client.client.bucket_exists(bucket_name):
+            self.minio_client.client.make_bucket(bucket_name)
+            log_file.write(f"Bucket '{bucket_name}' created.\n")
+
+        for url in urls:
+            object_name = self.store_in_minio(url, bucket_name)
+            if object_name:
+                processed_object_names.append(object_name)
+                log_file.write(f"Processed and stored: {url} -> {object_name}\n")
+            else:
+                log_file.write(f"Failed or skipped: {url}\n")
+
+        if processed_object_names:
+            self.process_documents_in_minio(bucket_name, processed_object_names, log_file)
+
+def main(urls_file, bucket_name, log_file_path):
     config = ClientConfig()
     minio_client = MinioClient(config=config)
     weaviate_client = WeaviateClient(config=config)
 
     processor = DocumentProcessor(minio_client, weaviate_client)
-    processor.fetch_and_process_urls(urls, bucket_name)
+    processor.fetch_and_process_urls(urls, bucket_name, log_file_path)
