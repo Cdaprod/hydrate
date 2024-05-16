@@ -36,12 +36,6 @@ class ClientConfig(BaseModel):
     minio_secret_key: str = os.getenv('MINIO_SECRET_KEY', 'minioadmin')
     weaviate_endpoint: str = os.getenv('WEAVIATE_ENDPOINT', 'http://localhost:8080')
 
-# class ClientConfig(BaseModel):
-#     minio_endpoint: str = Field(default="play.min.io:443")
-#     minio_access_key: str = Field(default="minioadmin")
-#     minio_secret_key: str = Field(default="minioadmin")
-#     weaviate_endpoint: str = Field(default="http://rpi5-1.tailb3ac8.ts.net:8080")
-
 class MinioClient(BaseModel):
     config: ClientConfig = Field(default_factory=ClientConfig)
 
