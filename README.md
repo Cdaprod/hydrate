@@ -5,7 +5,7 @@
 ![](/docs/images/photo.webp)
 
 # Hydrate-Minio-Weaviate
-Hydrate-Minio-Weaviate is a powerful Python package designed to automate the extraction, transformation, and loading of data from web resources directly into MinIO and Weaviate. This tool simplifies the process of hydrating your data lake and knowledge graph with fresh data, enhancing your AI and machine learning workflows with minimal effort. [Blog Outline](/BLOG.md)
+Hydrate-Minio-Weaviate is a powerful Python package designed to automate the extraction, transformation, and loading of data from web resources directly into MinIO and Weaviate. This tool simplifies the process of hydrating your data lake and knowledge graph with fresh data, enhancing your AI and machine learning workflows with minimal effort. [Blog Outline](/docs/BLOG.md)
 
 ## Features
 
