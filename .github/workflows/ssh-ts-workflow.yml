@@ -37,6 +37,6 @@ jobs:
       
       - name: SSH into Node
         run: |
-        ssh -o "StrictHostKeyChecking no" ironicbadgeraktz-cloud "
+        ssh -o "StrictHostKeyChecking no" cdaprod "
           uname -a
         "

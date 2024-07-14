@@ -35,10 +35,11 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
-      - name: Run Hydrate Script
+      - name: SSH into Node
         run: |
+        ssh -o "StrictHostKeyChecking no" cdaprod "
           python ./hydrate/hydrate.py ./hydrate/urls.txt cda-datasets process_log.txt
-        shell: bash
+        "
 
       - name: Upload Process Log as Artifact
         uses: actions/upload-artifact@v2
